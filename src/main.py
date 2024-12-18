@@ -1,13 +1,13 @@
 import os
 import logging
-from extractions import read_json, read_csv
-from transformations import (
+from src.extractions import read_json, read_csv
+from src.transformations import (
     title_dataframe, 
     combine_name_and_surname, 
     generate_unique_id, 
     add_id_to_sales, 
     delete_columns,
-    # move_column_to_front
+    move_column_to_front
 )
 
 # Configuración del logger
@@ -40,7 +40,7 @@ def main():
 
     except FileNotFoundError as e:
         logger.error("Error extracting data: %s", e)
-        return
+        return None, None
     
     # Transformations
     try:
@@ -65,18 +65,20 @@ def main():
         people_df = delete_columns(people_df, ["full_name"])
 
         # # 6. Moves id columns to front
-        # people_df = move_column_to_front(people_df, "person_id")
-        # sales_df = move_column_to_front(sales_df, "sales_id")
+        people_df = move_column_to_front(people_df, "person_id")
+        sales_df = move_column_to_front(sales_df, "sales_id")
 
     except Exception as e:
         logger.error("Error during transformation: %s", e)
-        return
+        return None, None
+
 
     # # Log final results
     logger.info("ETL pipeline completed. Final transformed data:")
     logger.info("\n\nPeople DataFrame:\n%s", people_df)
     logger.info("\n\nSales DataFrame:\n%s", sales_df)
 
+    return people_df, sales_df
 
 if __name__ == "__main__":
     main()
