@@ -2,7 +2,7 @@ import unittest
 import pandas as pd
 from src.transformations import (
     title_dataframe,
-    # generate_unique_id,
+    generate_unique_id,
     # move_column_to_front
 )
 
@@ -19,16 +19,16 @@ class TestTransformations(unittest.TestCase):
         expected = pd.DataFrame({"name": ["Alice", "Bob"], "surname": ["Johnson", "Smith"]})
         pd.testing.assert_frame_equal(result, expected)
 
-    # def test_generate_unique_id(self):
-    #     # Arrange
-    #     df = pd.DataFrame({"name": ["Alice", "Bob"]})
+    def test_generate_unique_id(self):
+        # Arrange
+        df = pd.DataFrame({"name": ["Alice", "Bob"]})
 
-    #     # Act
-    #     result = generate_unique_id(df, "id", prefix="test_")
+        # Act
+        result = generate_unique_id(df, "id", prefix="test_")
 
-    #     # Assert
-    #     expected = pd.DataFrame({"name": ["Alice", "Bob"], "id": ["test_1", "test_2"]})
-    #     pd.testing.assert_frame_equal(result, expected)
+        # Assert
+        expected = pd.DataFrame({"name": ["Alice", "Bob"], "id": ["test_1", "test_2"]})
+        pd.testing.assert_frame_equal(result, expected)
 
     # def test_move_column_to_front(self):
     #     # Arrange
