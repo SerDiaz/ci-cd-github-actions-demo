@@ -116,23 +116,46 @@ def delete_columns(
     """
     return df.drop(columns=columns, inplace=False)
 
-# def move_column_to_front(
-#     df: pd.DataFrame, 
-#     column_name: str
-# ) -> pd.DataFrame:
-#     """
-#     Moves the specified column to the first position in the DataFrame.
+def move_column_to_front(
+    df: pd.DataFrame, 
+    column_name: str
+) -> pd.DataFrame:
+    """
+    Moves the specified column to the first position in the DataFrame.
 
-#     Args:
-#         df (pd.DataFrame): The DataFrame to modify.
-#         column_name (str): The name of the column to move to the front.
+    Args:
+        df (pd.DataFrame): The DataFrame to modify.
+        column_name (str): The name of the column to move to the front.
 
-#     Returns:
-#         pd.DataFrame: The modified DataFrame with the specified column as the first one.
-#     """
-#     if column_name in df.columns:
-#         # Reorder columns: put the target column first, then the rest
-#         cols = [column_name] + [col for col in df.columns if col != column_name]
-#         return df[cols]
-#     else:
-#         raise ValueError(f"Column '{column_name}' does not exist in the DataFrame.")
+    Returns:
+        pd.DataFrame: The modified DataFrame with the specified column as the first one.
+    """
+    if column_name in df.columns:
+        # Reorder columns: put the target column first, then the rest
+        cols = [column_name] + [col for col in df.columns if col != column_name]
+        return df[cols]
+    else:
+        raise ValueError(f"Column '{column_name}' does not exist in the DataFrame.")
+
+import pandas as pd
+
+def cast_columns(
+    df: pd.DataFrame, 
+    column_types: dict
+) -> pd.DataFrame:
+    """
+    Cast columns in a DataFrame to specified types.
+
+    Parameters:
+        df (pd.DataFrame): The DataFrame to cast.
+        column_types (dict): A dictionary where keys are column names and values are the desired types.
+
+    Returns:
+        pd.DataFrame: The DataFrame with casted columns.
+    """
+    try:
+        return df.astype(column_types)
+    except KeyError as e:
+        raise KeyError(f"Column not found in DataFrame: {e}")
+    except ValueError as e:
+        raise ValueError(f"Invalid type conversion: {e}")

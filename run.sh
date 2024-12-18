@@ -4,6 +4,8 @@
 echo "Activating virtual environment..."
 source venv/bin/activate
 
+export PYTHONPATH=.
+
 # Execute main script
 echo "Running main.py..."
 python src/main.py
