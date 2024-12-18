@@ -1,0 +1,43 @@
+name: CI Develop to Main
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  qa_test_and_merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run QA test
+        run: |
+          python -m unittest discover -s src/tests/qa
+
+      - name: Merge to main
+        if: success()
+        run: |
+          git fetch origin
+          git checkout main
+          git merge --no-ff origin/develop
+          git push origin main

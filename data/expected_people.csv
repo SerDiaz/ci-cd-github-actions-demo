@@ -1,0 +1,4 @@
+person_id,first_name,last_name,birth_place,birth_date,email,residence
+1,Alice,Johnson,New York,1990-05-15,alice.johnson@example.com,San Francisco
+2,Bob,Smith,Los Angeles,1985-09-23,bob.smith@example.com,San Diego
+3,Charlie,Brown,Chicago,1992-12-11,charlie.brown@example.com,Seattle
