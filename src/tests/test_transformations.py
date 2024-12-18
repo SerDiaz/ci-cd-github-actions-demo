@@ -7,6 +7,18 @@ from src.transformations import (
 )
 
 class TestTransformations(unittest.TestCase):
-    pass
+    def test_title_dataframe(self):
+        # Arrange
+        df = pd.DataFrame({"name": ["alice", "bob"], "surname": ["johnson", "smith"]})
+        columns = ["name", "surname"]
+
+        # Act
+        result = title_dataframe(df, columns)
+
+        # Assert
+        expected = pd.DataFrame({"name": ["Alice", "Bob"], "surname": ["Johnson", "Smith"]})
+        pd.testing.assert_frame_equal(result, expected)
+
+
 if __name__ == "__main__":
     unittest.main()
