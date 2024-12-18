@@ -20,3 +20,31 @@ def combine_name_and_surname(
     """
     df[new_col] = df[name_col] + " " + df[surname_col]
     return df
+
+def add_id_to_sales(
+    sales_df: pd.DataFrame, 
+    sellers_df: pd.DataFrame, 
+    sales_col: str, 
+    sellers_col: str, 
+    id_col: str
+) -> pd.DataFrame:
+    """
+    Adds a seller ID to the sales DataFrame based on a match with the sellers DataFrame.
+    
+    Args:
+        sales_df (pd.DataFrame): The sales DataFrame.
+        sellers_df (pd.DataFrame): The sellers DataFrame.
+        sales_col (str): The seller column in the sales DataFrame.
+        sellers_col (str): The seller column in the sellers DataFrame.
+        id_col (str): The ID column in the sellers DataFrame.
+
+    Returns:
+        pd.DataFrame: The sales DataFrame with the seller IDs added.
+    """
+    sales_df = sales_df.merge(
+        sellers_df[[sellers_col, id_col]],
+        left_on=sales_col,
+        right_on=sellers_col,
+        how="left"
+    )
+    return sales_df
