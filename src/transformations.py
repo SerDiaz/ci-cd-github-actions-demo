@@ -14,7 +14,9 @@ def title_dataframe(
     Returns:
         pd.DataFrame: The transformed DataFrame with specified columns in title case.
     """
-    df[columns] = df[columns].astype(str).str.title()
+    for col in columns:
+        if col in df.columns:
+            df[col] = df[col].str.title()
     return df
 
 def generate_unique_id(
@@ -46,7 +48,7 @@ def generate_unique_id(
                 id_col = f"{original_id_col}_{counter}"
                 counter += 1
 
-    df[id_col] = [f"{prefix}_{i}" for i in range(1, len(df) + 1)]
+    df[id_col] = [f"{prefix}{i}" for i in range(1, len(df) + 1)]
     return df
 
 
