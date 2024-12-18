@@ -117,3 +117,24 @@ def delete_columns(
         pd.DataFrame: The transformed DataFrame without the specified columns.
     """
     return df.drop(columns=columns, inplace=False)
+
+def move_column_to_front(
+    df: pd.DataFrame, 
+    column_name: str
+) -> pd.DataFrame:
+    """
+    Moves the specified column to the first position in the DataFrame.
+
+    Args:
+        df (pd.DataFrame): The DataFrame to modify.
+        column_name (str): The name of the column to move to the front.
+
+    Returns:
+        pd.DataFrame: The modified DataFrame with the specified column as the first one.
+    """
+    if column_name in df.columns:
+        # Reorder columns: put the target column first, then the rest
+        cols = [column_name] + [col for col in df.columns if col != column_name]
+        return df[cols]
+    else:
+        raise ValueError(f"Column '{column_name}' does not exist in the DataFrame.")
