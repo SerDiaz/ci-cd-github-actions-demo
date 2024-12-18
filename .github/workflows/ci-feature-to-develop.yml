@@ -34,6 +34,7 @@ jobs:
       - name: Auto merge branch
         if: success()
         run: |
+          git fetch origin develop:develop
           git checkout develop
           git merge --no-ff ${{ github.event.pull_request.head.ref }}
           git push origin develop
