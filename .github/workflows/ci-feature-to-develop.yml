@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -34,7 +36,7 @@ jobs:
       - name: Auto merge branch
         if: success()
         run: |
-          git fetch origin develop:develop
+          git fetch origin
           git checkout develop
-          git merge --no-ff ${{ github.event.pull_request.head.ref }}
+          git merge --no-ff origin/${{ github.event.pull_request.head.ref }}
           git push origin develop
