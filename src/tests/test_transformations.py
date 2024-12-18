@@ -30,6 +30,16 @@ class TestTransformations(unittest.TestCase):
         expected = pd.DataFrame({"name": ["Alice", "Bob"], "id": ["test_1", "test_2"]})
         pd.testing.assert_frame_equal(result, expected)
 
+    def test_move_column_to_front(self):
+        # Arrange
+        df = pd.DataFrame({"id": [1, 2], "name": ["Alice", "Bob"]})
+
+        # Act
+        result = move_column_to_front(df, "name")
+
+        # Assert
+        expected = pd.DataFrame({"name": ["Alice", "Bob"], "id": [1, 2]})
+        pd.testing.assert_frame_equal(result, expected)
 
 if __name__ == "__main__":
     unittest.main()
