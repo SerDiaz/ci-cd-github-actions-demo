@@ -40,37 +40,37 @@ def combine_name_and_surname(
     df[new_col] = df[name_col] + " " + df[surname_col]
     return df
 
-def generate_unique_id(
-    df: pd.DataFrame, 
-    id_col: str, 
-    prefix: str = "", 
-    overwrite: bool = True
-) -> pd.DataFrame:
-    """
-    Generates a unique ID for each row in the DataFrame.
+# def generate_unique_id(
+#     df: pd.DataFrame, 
+#     id_col: str, 
+#     prefix: str = "", 
+#     overwrite: bool = True
+# ) -> pd.DataFrame:
+#     """
+#     Generates a unique ID for each row in the DataFrame.
     
-    Args:
-        df (pd.DataFrame): The DataFrame to transform.
-        id (str): The name of the column to store the generated IDs.
-        prefix (str, optional): A prefix for the IDs. Defaults to "id_".
-        overwrite (bool, optional): If True, overwrites the column if it already exists.
-                                    If False, appends "_new" to the column name. Defaults to True.
+#     Args:
+#         df (pd.DataFrame): The DataFrame to transform.
+#         id (str): The name of the column to store the generated IDs.
+#         prefix (str, optional): A prefix for the IDs. Defaults to "id_".
+#         overwrite (bool, optional): If True, overwrites the column if it already exists.
+#                                     If False, appends "_new" to the column name. Defaults to True.
 
-    Returns:
-        pd.DataFrame: The transformed DataFrame with the generated IDs.
-    """
-    original_id_col = id_col
-    if id_col in df.columns:
-        if overwrite:
-            df.drop(columns=[id_col], inplace=True)
-        else:
-            counter = 1
-            while id_col in df.columns:
-                id_col = f"{original_id_col}_{counter}"
-                counter += 1
+#     Returns:
+#         pd.DataFrame: The transformed DataFrame with the generated IDs.
+#     """
+#     original_id_col = id_col
+#     if id_col in df.columns:
+#         if overwrite:
+#             df.drop(columns=[id_col], inplace=True)
+#         else:
+#             counter = 1
+#             while id_col in df.columns:
+#                 id_col = f"{original_id_col}_{counter}"
+#                 counter += 1
 
-    df[id_col] = [f"{prefix}{i}" for i in range(1, len(df) + 1)]
-    return df
+#     df[id_col] = [f"{prefix}{i}" for i in range(1, len(df) + 1)]
+#     return df
 
 # def add_id_to_sales(
 #     sales_df: pd.DataFrame, 
