@@ -19,6 +19,17 @@ class TestTransformations(unittest.TestCase):
         expected = pd.DataFrame({"name": ["Alice", "Bob"], "surname": ["Johnson", "Smith"]})
         pd.testing.assert_frame_equal(result, expected)
 
+    def test_generate_unique_id(self):
+        # Arrange
+        df = pd.DataFrame({"name": ["Alice", "Bob"]})
+
+        # Act
+        result = generate_unique_id(df, "id", prefix="test_")
+
+        # Assert
+        expected = pd.DataFrame({"name": ["Alice", "Bob"], "id": ["test_1", "test_2"]})
+        pd.testing.assert_frame_equal(result, expected)
+
 
 if __name__ == "__main__":
     unittest.main()
