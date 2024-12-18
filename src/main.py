@@ -3,11 +3,11 @@ import logging
 from extractions import read_json, read_csv
 from transformations import (
     title_dataframe, 
-    combine_name_and_surname, 
-    generate_unique_id, 
-    add_id_to_sales, 
-    delete_columns,
-    move_column_to_front
+    combine_name_and_surname 
+    # generate_unique_id, 
+    # add_id_to_sales, 
+    # delete_columns,
+    # move_column_to_front
 )
 
 # Configuración del logger
@@ -54,20 +54,20 @@ def main():
         people_df = combine_name_and_surname(people_df, "first_name", "last_name", "full_name")
         
         # 3. Generate unique IDs for people
-        people_df = generate_unique_id(people_df, "person_id")
-        sales_df = generate_unique_id(sales_df, "sales_id")
+        # people_df = generate_unique_id(people_df, "person_id")
+        # sales_df = generate_unique_id(sales_df, "sales_id")
 
-        # 4. Add IDs to sales based on seller names
-        sales_df = add_id_to_sales(sales_df, people_df, "seller", "full_name", "person_id")
+        # # 4. Add IDs to sales based on seller names
+        # sales_df = add_id_to_sales(sales_df, people_df, "seller", "full_name", "person_id")
         
-        # 5. Delete the seller column from sales
-        sales_df = delete_columns(sales_df, ["seller", "full_name"])
-        people_df = delete_columns(people_df, ["full_name"])
+        # # 5. Delete the seller column from sales
+        # sales_df = delete_columns(sales_df, ["seller", "full_name"])
+        # people_df = delete_columns(people_df, ["full_name"])
 
-        # 6. Moves id columns to front
-        people_df = move_column_to_front(people_df, "person_id")
-        sales_df = move_column_to_front(sales_df, "sales_id")
-        
+        # # 6. Moves id columns to front
+        # people_df = move_column_to_front(people_df, "person_id")
+        # sales_df = move_column_to_front(sales_df, "sales_id")
+
     except Exception as e:
         logger.error("Error during transformation: %s", e)
         return
