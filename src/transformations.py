@@ -48,3 +48,19 @@ def add_id_to_sales(
         how="left"
     )
     return sales_df
+
+def delete_columns(
+    df: pd.DataFrame, 
+    columns: list[str]
+) -> pd.DataFrame:
+    """
+    Deletes the specified columns from a DataFrame.
+    
+    Args:
+        df (pd.DataFrame): The DataFrame to transform.
+        columns (list[str]): List of column names to delete.
+
+    Returns:
+        pd.DataFrame: The transformed DataFrame without the specified columns.
+    """
+    return df.drop(columns=columns, inplace=False)
