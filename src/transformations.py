@@ -1,5 +1,22 @@
 import pandas as pd
 
+def title_dataframe(
+    df: pd.DataFrame, 
+    columns: list[str]
+) -> pd.DataFrame:
+    """
+    Converts the specified columns of a DataFrame to title case.
+    
+    Args:
+        df (pd.DataFrame): The DataFrame to transform.
+        columns (list[str]): List of column names to convert to title case.
+
+    Returns:
+        pd.DataFrame: The transformed DataFrame with specified columns in title case.
+    """
+    df[columns] = df[columns].astype(str).str.title()
+    return df
+
 def combine_name_and_surname(
     df: pd.DataFrame, 
     name_col: str, 
