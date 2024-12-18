@@ -136,3 +136,26 @@ def move_column_to_front(
         return df[cols]
     else:
         raise ValueError(f"Column '{column_name}' does not exist in the DataFrame.")
+
+import pandas as pd
+
+def cast_columns(
+    df: pd.DataFrame, 
+    column_types: dict
+) -> pd.DataFrame:
+    """
+    Cast columns in a DataFrame to specified types.
+
+    Parameters:
+        df (pd.DataFrame): The DataFrame to cast.
+        column_types (dict): A dictionary where keys are column names and values are the desired types.
+
+    Returns:
+        pd.DataFrame: The DataFrame with casted columns.
+    """
+    try:
+        return df.astype(column_types)
+    except KeyError as e:
+        raise KeyError(f"Column not found in DataFrame: {e}")
+    except ValueError as e:
+        raise ValueError(f"Invalid type conversion: {e}")
